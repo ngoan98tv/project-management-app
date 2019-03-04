@@ -3,7 +3,37 @@ import React, { Component } from 'react';
 import Auth from "./auth";
 
 class Sidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeItem: 'Dashboard',
+            items: [
+                { name: "Dashboard", badge: 0, icon: "dashboard", url: "/dashboard", display: true},
+                { name: "Projects", badge: 4, icon: "assignment", url: "/projects", display: true},
+                { name: "Tasks", badge: 5, icon: "ballot", url: "/tasks", display: true},
+                { name: "Discussions", badge: 0, icon: "chat", url: "/discussions", display: true},
+                { name: "Users", badge: 0, icon: "person", url: "/users", display: true},
+                { name: "Settings", badge: 0, icon: "settings", url: "/settings", display: true},
+                { name: "Log Out", badge: 0, icon: "exit_to_app", url: "/logout", display: true}
+            ]
+        }
+    }
+
     render() {
+        const items = this.state.items.filter((item) => item.display).map((item,index) => (
+            <li className={this.state.activeItem === item.name ? "nav-item active" : "nav-item"} key={"item_" + index}>
+                <Link className="nav-link" to={item.url} onClick={() => {
+                    this.setState({
+                        activeItem: item.name
+                    })
+                }}>
+                    <i className="material-icons">{item.icon}</i>
+                    {item.badge > 0
+                        ? <p>{item.name + " "}<span className='badge badge-primary'>{item.badge}</span></p>
+                        : <p>{item.name}</p>}
+                </Link>
+            </li>
+        ));
         return (
             <div className={"sidebar"} data-color="purple">
                 <div className={"logo"}>
@@ -11,48 +41,7 @@ class Sidebar extends Component {
                 </div>
                 <div className={"sidebar-wrapper"}>
                     <ul className={"nav"}>
-                        <li className="nav-item ">
-                            <Link className="nav-link" to="/dashboard">
-                                <i className="material-icons">dashboard</i>
-                                <p>Dashboard</p>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/projects">
-                                <i className="material-icons">assignment</i>
-                                <p>Projects <span className="badge badge-primary">4</span></p>
-                            </Link>
-                        </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link" to="/tasks">
-                                <i className="material-icons">ballot</i>
-                                <p>Tasks <span className="badge badge-primary">14</span></p>
-                            </Link>
-                        </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link" to="/discussions">
-                                <i className="material-icons">chat</i>
-                                <p>Discussions <span className="badge badge-primary">4</span></p>
-                            </Link>
-                        </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link" to="/users">
-                                <i className="material-icons">person</i>
-                                <p>Users</p>
-                            </Link>
-                        </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link" to="/settings">
-                                <i className="material-icons">settings</i>
-                                <p>Settings</p>
-                            </Link>
-                        </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link" to="/logout">
-                                <i className="material-icons">exit_to_app</i>
-                                <p>Log out</p>
-                            </Link>
-                        </li>
+                        {items}
                     </ul>
                 </div>
             </div>
