@@ -11,3 +11,7 @@ body {
   position: relative;
   top: 15vh;
 }
+
+.badge {
+  padding: 6px 8px;
+}

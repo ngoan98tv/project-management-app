@@ -1,8 +1,11 @@
 const Auth = {
     isAuthenticated: false,
+    role: 'admin',
+    name: 'Jack',
+    email: '',
     signIn(email, password, action) {
         this.isAuthenticated = true;
-        console.log(email + " | " + password);
+        this.email = email;
         action();
     },
     signOut(action) {

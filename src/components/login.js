@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Auth from './auth';
 
 class Login extends Component {
@@ -43,7 +43,7 @@ class Login extends Component {
                             </div>
                             <div className={"form-group"}>
                                 <input id={"userPassword"} type={"password"} className={"form-control"} placeholder={"Enter your password"}/>
-                                <small className={"form-text text-muted"}><a href={"/forgot-password"}>Forgot password!</a></small>
+                                <small className={"form-text text-muted"}><Link to={"/forgot-password"}>Forgot password!</Link></small>
                             </div>
                             <button type={"submit"} className={"btn btn-primary"}>Sign in</button>
                         </form>
