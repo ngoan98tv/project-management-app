@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
+import Navbar from "./navbar";
 
 class Dashboard extends Component {
     render() {
         return (
             <div className={"main-panel"}>
-                <h1>Dashboard</h1>
+                <Navbar name={"Dashboard"}/>
+                <div className={"content"}>
+                    <div className={"container-fluid"}>
+                        <div className={"row"}>
+                            {""}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

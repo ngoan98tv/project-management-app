@@ -1,5 +1,5 @@
 const Auth = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     role: 'admin',
     name: 'Jack',
     email: '',

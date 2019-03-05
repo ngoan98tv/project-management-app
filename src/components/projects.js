@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
+import Navbar from "./navbar";
 
 class Projects extends Component {
     render() {
         return (
             <div className={"main-panel"}>
-                <h1>Projects</h1>
+                <Navbar name={"Projects"}/>
+                <div className={"content"}>
+                    <div className={"container-fluid"}>
+                        <div className={"row"}>
+                            {""}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

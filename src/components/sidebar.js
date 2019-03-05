@@ -1,5 +1,6 @@
 import {Link, withRouter} from "react-router-dom";
 import React, { Component } from 'react';
+import sidebarBackground from '../img/sidebarbg.jpg';
 import Auth from "./auth";
 
 class Sidebar extends Component {
@@ -35,7 +36,7 @@ class Sidebar extends Component {
             </li>
         ));
         return (
-            <div className={"sidebar"} data-color="purple">
+            <div className={"sidebar"} data-color="purple" data-background-color={"black"} data-image={sidebarBackground}>
                 <div className={"logo"}>
                     <h1 className={"simple-text logo-normal"}>Software Company</h1>
                 </div>
@@ -52,7 +53,7 @@ class Sidebar extends Component {
 const DisplaySidebar = withRouter(() => {
     return Auth.isAuthenticated
         ? <Sidebar/>
-        : ""
+        : "";
 });
 
 export default DisplaySidebar;
