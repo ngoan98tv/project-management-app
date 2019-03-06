@@ -1,7 +1,7 @@
 import {Link, withRouter} from "react-router-dom";
 import React, { Component } from 'react';
-import sidebarBackground from '../img/sidebarbg.jpg';
-import Auth from "./auth";
+import sidebarBackground from '../../img/sidebarbg.jpg';
+import Auth from "../auth";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -45,6 +45,7 @@ class Sidebar extends Component {
                         {items}
                     </ul>
                 </div>
+                <div className={"sidebar-background"} style={{ backgroundImage: `url(${sidebarBackground})` }}/>
             </div>
         );
     }

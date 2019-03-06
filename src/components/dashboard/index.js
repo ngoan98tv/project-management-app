@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Navbar from "./navbar";
+import Navbar from "../navbar";
 
-class Tasks extends Component {
+class Dashboard extends Component {
     render() {
-        return(
+        return (
             <div className={"main-panel"}>
-                <Navbar name={"Tasks"}/>
+                <Navbar name={"Dashboard"}/>
                 <div className={"content"}>
                     <div className={"container-fluid"}>
                         <div className={"row"}>
@@ -18,4 +18,4 @@ class Tasks extends Component {
     }
 }
 
-export default Tasks;
+export default Dashboard;

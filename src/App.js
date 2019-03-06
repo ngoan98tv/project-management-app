@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import React, { Component, Suspense, lazy } from 'react';
 import PrivateRoute from './components/private-route';
-import DisplaySidebar from "./components/sidebar";
+import DisplaySidebar from './components/sidebar';
 
 const Login = lazy(() => import('./components/login'));
 const ForgotPassword = lazy(() => import('./components/forgot-password'));
