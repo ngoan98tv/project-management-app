@@ -1,5 +1,5 @@
 import { authActionTypes } from "../types";
-import States from "../states";
+import States from "../initialStates";
 
 export default (state = States.auth, action) => {
     switch (action.type) {

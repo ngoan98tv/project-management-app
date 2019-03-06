@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import React, { Component, Suspense, lazy } from 'react';
+import { Provider } from 'react-redux';
+import store from './redux';
 import PrivateRoute from './components/private-route';
 import DisplaySidebar from './components/sidebar';
 
@@ -17,6 +19,7 @@ const LogOut = lazy(() => import('./components/logout'));
 class App extends Component {
     render() {
         return (
+            <Provider store={store}>
             <Router>
                 <div>
                 <DisplaySidebar/>
@@ -37,6 +40,7 @@ class App extends Component {
                 </Suspense>
                 </div>
             </Router>
+            </Provider>
         );
     }
 }
