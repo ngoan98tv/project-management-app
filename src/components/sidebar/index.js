@@ -1,7 +1,8 @@
-import {Link, withRouter} from "react-router-dom";
+/*Sidebar Component*/
+import {Link} from "react-router-dom";
 import React, { Component } from 'react';
 import sidebarBackground from '../../img/sidebarbg.jpg';
-import Auth from "../auth";
+import {connect} from "react-redux";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -18,43 +19,53 @@ class Sidebar extends Component {
                 { name: "Log Out", badge: 0, icon: "exit_to_app", url: "/logout", display: true}
             ]
         }
+        this.createItem = this.createItem.bind(this);
+    }
+
+    createItem(name, url, icon, badge) {
+        return (
+            <li className={this.state.activeItem === name ? "nav-item active" : "nav-item"} key={name}>
+                <Link className="nav-link" to={url} onClick={() => {
+                    this.setState({
+                        activeItem: name
+                    })
+                }}>
+                    <i className="material-icons">{icon}</i>
+                    {badge > 0
+                        ? <p>{name + " "}<span className='badge badge-primary'>{badge}</span></p>
+                        : <p>{name}</p>}
+                </Link>
+            </li>
+        );
     }
 
     render() {
-        const items = this.state.items.filter((item) => item.display).map((item,index) => (
-            <li className={this.state.activeItem === item.name ? "nav-item active" : "nav-item"} key={"item_" + index}>
-                <Link className="nav-link" to={item.url} onClick={() => {
-                    this.setState({
-                        activeItem: item.name
-                    })
-                }}>
-                    <i className="material-icons">{item.icon}</i>
-                    {item.badge > 0
-                        ? <p>{item.name + " "}<span className='badge badge-primary'>{item.badge}</span></p>
-                        : <p>{item.name}</p>}
-                </Link>
-            </li>
-        ));
-        return (
-            <div className={"sidebar"} data-color="purple" data-background-color={"black"} data-image={sidebarBackground}>
-                <div className={"logo"}>
-                    <h1 className={"simple-text logo-normal"}>Software Company</h1>
+        if (this.props.isAuthenticated) {
+            const items =
+                this.state.items
+                    .filter((item) => item.display)
+                    .map((item) => this.createItem(item.name, item.url, item.icon, item.badge));
+            return (
+                <div className={"sidebar"} data-color="purple" data-background-color={"black"} data-image={sidebarBackground}>
+                    <div className={"logo"}>
+                        <h1 className={"simple-text logo-normal"}>Software Company</h1>
+                    </div>
+                    <div className={"sidebar-wrapper"}>
+                        <ul className={"nav"}>
+                            {items}
+                        </ul>
+                    </div>
+                    <div className={"sidebar-background"} style={{ backgroundImage: `url(${sidebarBackground})` }}/>
                 </div>
-                <div className={"sidebar-wrapper"}>
-                    <ul className={"nav"}>
-                        {items}
-                    </ul>
-                </div>
-                <div className={"sidebar-background"} style={{ backgroundImage: `url(${sidebarBackground})` }}/>
-            </div>
         );
+        } else {
+            return (<div/>);
+        }
     }
 }
 
-const DisplaySidebar = withRouter(() => {
-    return Auth.isAuthenticated
-        ? <Sidebar/>
-        : "";
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated
 });
 
-export default DisplaySidebar;
+export default connect(mapStateToProps, null)(Sidebar);

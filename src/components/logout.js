@@ -1,11 +1,17 @@
-import Auth from "./auth";
+import {Redirect} from "react-router-dom";
+import {logout} from "../redux/actions/authActions";
+import {connect} from "react-redux";
 import React from 'react';
-import {withRouter} from "react-router-dom";
 
-const LogOut = withRouter(({history}) => (
-    <div>
-    {Auth.signOut(() => history.push("/login"))}
-    </div>
-));
+const LogOut = ({logout}) => {
+    logout();
+    return <Redirect to={'/login'}/>;
+};
 
-export default LogOut;
+const mapDispatchToProps = (dispatch) => ({
+    logout: () => {
+        dispatch(logout());
+    }
+});
+
+export default connect(null, mapDispatchToProps)(LogOut);
